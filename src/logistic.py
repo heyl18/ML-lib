@@ -11,7 +11,7 @@ X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2)
     注意：以下为二分类问题的逻辑回归
 '''
 class Logistic:
-    def __init__(self, batch_size = 32, learning_rate = 0.1, max_epoch = 100, weight_reg = 0.2):
+    def __init__(self, batch_size = 32, learning_rate = 0.1, max_epoch = 30, weight_reg = 0.2):
         self.learning_rate = learning_rate
         self.weight_reg = weight_reg
         self.max_epoch = max_epoch
@@ -29,7 +29,7 @@ class Logistic:
                 batch_loss.append(self.__loss(X_batch, y_batch) / X_batch.shape[0])
                 batch_acc.append(np.sum(self.predict(X_batch) == y_batch) / X_batch.shape[0])
                 grad = self.__grad(X_batch, y_batch)
-                self.w -= self.learning_rate * grad / X.shape[0]
+                self.w -= self.learning_rate * grad / X_batch.shape[0]
             print("Train epoch @", i, "mean_batch_acc: %.4f" % np.mean(batch_acc), "mean_batch_loss: %.4f" % np.mean(batch_loss))
             if need_plot:
                 loss.append(np.mean(batch_loss))
