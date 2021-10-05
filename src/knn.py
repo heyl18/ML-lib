@@ -1,10 +1,6 @@
 from collections import Counter
 import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report
-from common.load_data import iris, load_data
-X, y = load_data(iris, scale = True)
-X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2)
+
 
 class KNN:
     def __init__(self, K):
@@ -27,7 +23,12 @@ class KNN:
         predicted_labels = [self.__predict(x) for x in X]
         return np.array(predicted_labels)
 
-if __name__ == '__main__':
+if __name__ == '__main__':  
+    from sklearn.model_selection import train_test_split
+    from sklearn.metrics import classification_report
+    from common.load_data import iris, load_data
+    X, y = load_data(iris, scale = True)
+    X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2)
     model = KNN(5)
     model.fit(X_train,y_train)
     predictions = model.predict(X_test)
